@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/felixmosh/postcss-extract-styles",
   "dependencies": {
-    "postcss": "^5.0.2"
+    "postcss": "^5.1.0"
   },
   "devDependencies": {
     "chai": "^3.2.0",
