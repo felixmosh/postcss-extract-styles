@@ -1,47 +1,34 @@
 /* line 2, app/common.scss */
 
 .tpa-first:hover {
-	color: [[tpa-color-1]];
 	margin-left: 10px;
 }
 
 .tpa-second {
 	border: 1px solid #000;
-	font:[[Body-M]];
 }
 
 .no-tpa {
 	border: 1px solid #000;
 }
 
-.only-tpa {
-	color: [[tpa-color-2]];
-}
-
 @media (min-width: 300px) and (max-width: 730px) {
 	.tpa-first:hover {
 		/*height: 100%;*/
-		color: [[tpa-color-1]];
 		margin-left: 10px;
 		padding: 5px 2px 5px 2px;
 	}
 
 	.tpa-second {
 		border: 1px solid #000;
-		font: [[Body-M]];
 	}
 
 	.no-tpa {
 		border: 1px solid #000;
 	}
-
-	.only-tpa {
-		color: [[tpa-color-2]];
-	}
 }
 
 @keyframes identifier {
-	0% { color: [[xxx yyy]]; }
 	100% { color:#000; }
 }
 
@@ -59,9 +46,6 @@
 
 @media (min-width: 300px) and (max-width: 730px) {
 	/* comment */
-	.tpa-first:hover {
-		width: [[ tpa-width ]];
-	}
 }
 
 @media (min-width: 300px) and (max-width: 730px) {
