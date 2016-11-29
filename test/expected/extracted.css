@@ -1,0 +1,29 @@
+.tpa-first:hover {
+	color: [[tpa-color-1]]
+}
+.tpa-second {
+	font:[[Body-M]]
+}
+.only-tpa {
+	color: [[tpa-color-2]]
+}
+@media (min-width: 300px) and (max-width: 730px) {
+	.tpa-first:hover {
+		color: [[tpa-color-1]]
+	}
+	.tpa-second {
+		font: [[Body-M]]
+	}
+	.only-tpa {
+		color: [[tpa-color-2]]
+	}
+}
+@keyframes identifier {
+	0% { color: [[xxx yyy]]
+	}
+}
+@media (min-width: 300px) and (max-width: 730px) {
+	.tpa-first:hover {
+		width: [[ tpa-width ]]
+	}
+}
