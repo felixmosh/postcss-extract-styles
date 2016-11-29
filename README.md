@@ -12,18 +12,14 @@
 	margin-left: 10px;
 }
 ```
-```javascript
-// when remove = true
-```
 ```css
+// when remove = true
 .wix-tpa {
   margin-left: 10px;
 }
 ```
-```javascript
-// when remove = false
-```
 ```css
+// when remove = false
 .wix-tpa {
   color: {{color-1}};
 }
