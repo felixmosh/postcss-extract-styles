@@ -1,17 +1,7 @@
 var postcss = require('postcss');
 
-function extend(a, b) {
-	for (var key in b)
-		if (b.hasOwnProperty(key))
-			a[key] = b[key];
-	return a;
-}
 
 module.exports = postcss.plugin('postcss-extract-styles', function (opts) {
-	opts = extend({
-		remove: false,
-		pattern: false
-	}, opts);
 
 	function handleDeclarations(rule, newRule, options) {
 		rule.walkDecls(function (decl) {
@@ -20,13 +10,12 @@ module.exports = postcss.plugin('postcss-extract-styles', function (opts) {
 				newDecl.raws = decl.raws;
 				newRule.append(newDecl);
 
-				if (options.remove) {
-					decl.remove();
+				decl.remove();
 
-					if (rule.nodes.length === 0) {
-						rule.remove();
-					}
+				if (rule.nodes.length === 0) {
+					rule.remove();
 				}
+
 			}
 		});
 	}
@@ -56,7 +45,7 @@ module.exports = postcss.plugin('postcss-extract-styles', function (opts) {
 				if (newAtRule.nodes.length) {
 					newcss.append(newAtRule);
 				}
-				if (opts.remove && rule.nodes.length === 0) {
+				if (rule.nodes.length === 0) {
 					rule.remove();
 				}
 			}
@@ -69,15 +58,14 @@ module.exports = postcss.plugin('postcss-extract-styles', function (opts) {
 				}
 			}
 		});
-
 	}
 
-
 	return function (css, result) {
-		var newcss = postcss.root();
+		var extractedCSS = postcss.root();
 
-		extractStyles(css, newcss, opts);
+		extractStyles(css, extractedCSS, opts);
 
-		result.root = opts.remove ? css : newcss;
+		result.root = css;
+		result.extracted = extractedCSS.toString();
 	};
 });

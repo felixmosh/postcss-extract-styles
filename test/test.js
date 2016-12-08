@@ -16,9 +16,9 @@ var test = function (inputFile, opts, done) {
 	var expected = readFile(path.join('expected', inputFile + '.css'));
 
 	postcss([plugin(opts)]).process(input).then(function (result) {
-		fs.writeFileSync(path.join(__dirname, 'temp.css'), result.css);
-		expect(result.css).to.eql(expected);
+		expect(result[inputFile === 'extracted' ? 'extracted' : 'css'].toString()).to.eql(expected);
 		expect(result.warnings()).to.be.empty;
+
 		done();
 	}).catch(function (error) {
 		done(error);
@@ -27,10 +27,10 @@ var test = function (inputFile, opts, done) {
 
 describe('postcss-extract-styles', function () {
 	it('should extract styles that matches to pattern', function (done) {
-		test('remove', {pattern: pattern, remove: true}, done);
+		test('remove', {pattern: pattern}, done);
 	});
 
 	it('should remain only styles that matches to pattern', function (done) {
-		test('extracted', {pattern: pattern, remove: false}, done);
+		test('extracted', {pattern: pattern}, done);
 	});
 });

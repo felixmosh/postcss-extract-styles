@@ -13,13 +13,13 @@
 }
 ```
 ```css
-// when remove = true
+// remain
 .wix-tpa {
   margin-left: 10px;
 }
 ```
 ```css
-// when remove = false
+// extracted
 .wix-tpa {
   color: {{color-1}};
 }
@@ -29,10 +29,13 @@
 
 ```js
 const options = {
-  pattern: /{{[^\}]+}}/g,
-  remove: true // default true
+  pattern: /{{[^\}]+}}/g
 };
-postcss([ require('postcss-extract-styles')(options) ])
+postcss([ require('postcss-extract-styles')(options) ]
+  .then((result) => {
+     result.css // would be the "remain" part
+     result.extracted // would be the "extracted" part
+  });
 ```
 
 See [PostCSS] docs for examples for your environment.
