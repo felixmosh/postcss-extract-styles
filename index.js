@@ -1,12 +1,11 @@
-var postcss = require('postcss');
+const postcss = require('postcss');
 
-
-module.exports = postcss.plugin('postcss-extract-styles', function (opts) {
+module.exports = postcss.plugin('postcss-extract-styles', (opts) => {
 
 	function handleDeclarations(rule, newRule, options) {
-		rule.walkDecls(function (decl) {
+		rule.walkDecls((decl) => {
 			if (options.pattern.test(decl.toString())) {
-				var newDecl = decl.clone();
+				const newDecl = decl.clone();
 				newDecl.raws = decl.raws;
 				newRule.append(newDecl);
 
@@ -21,25 +20,17 @@ module.exports = postcss.plugin('postcss-extract-styles', function (opts) {
 	}
 
 	function cloneRule(rule) {
-		var newRule = rule.clone();
+		const newRule = rule.clone();
 
 		newRule.removeAll();
 
 		return newRule;
 	}
 
-	function cloneAtRole(rule) {
-		var newAtRule = rule.clone();
-
-		newAtRule.removeAll();
-
-		return newAtRule;
-	}
-
 	function extractStyles(css, newcss, opts) {
-		css.each(function (rule) {
-			if (rule.type === 'atrule' && rule.walkRules) {
-				var newAtRule = cloneAtRole(rule);
+		css.each((rule) => {
+			if (rule.type === 'atrule' && rule.walkRules && rule.nodes) {
+				const newAtRule = cloneRule(rule);
 				extractStyles(rule, newAtRule, opts);
 
 				if (newAtRule.nodes.length) {
@@ -50,7 +41,7 @@ module.exports = postcss.plugin('postcss-extract-styles', function (opts) {
 				}
 			}
 			else if (rule.type === 'rule' && rule.walkDecls) {
-				var newRule = cloneRule(rule);
+				const newRule = cloneRule(rule);
 
 				handleDeclarations(rule, newRule, opts);
 				if (newRule.nodes.length) {
@@ -60,8 +51,8 @@ module.exports = postcss.plugin('postcss-extract-styles', function (opts) {
 		});
 	}
 
-	return function (css, result) {
-		var extractedCSS = postcss.root();
+	return (css, result) => {
+		const extractedCSS = postcss.root();
 
 		extractStyles(css, extractedCSS, opts);
 

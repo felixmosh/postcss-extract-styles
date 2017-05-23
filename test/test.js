@@ -1,36 +1,36 @@
-var postcss = require('postcss');
-var expect = require('chai').expect;
-var fs = require('fs');
-var path = require('path');
+const postcss = require('postcss');
+const expect = require('chai').expect;
+const fs = require('fs');
+const path = require('path');
 
-var plugin = require('../');
+const plugin = require('../');
 
 function readFile(relPath) {
 	return fs.readFileSync(path.join(__dirname, relPath), {encoding: 'utf8'});
 }
 
-var pattern = /\[\[[^\]]+\]\]/;
+const pattern = /\[\[[^\]]+\]\]/;
 
-var test = function (inputFile, opts, done) {
-	var input = readFile(path.join('fixtures', inputFile + '.css'));
-	var expected = readFile(path.join('expected', inputFile + '.css'));
+const test = function (inputFile, opts, done) {
+	const input = readFile(path.join('fixtures',  `${inputFile}.css`));
+	const expected = readFile(path.join('expected', `${inputFile}.css`));
 
-	postcss([plugin(opts)]).process(input).then(function (result) {
+	postcss([plugin(opts)]).process(input).then((result) => {
 		expect(result[inputFile === 'extracted' ? 'extracted' : 'css'].toString()).to.eql(expected);
 		expect(result.warnings()).to.be.empty;
 
 		done();
-	}).catch(function (error) {
+	}).catch((error) => {
 		done(error);
 	});
 };
 
-describe('postcss-extract-styles', function () {
-	it('should extract styles that matches to pattern', function (done) {
+describe('postcss-extract-styles', () => {
+	it('should extract styles that matches to pattern', (done) => {
 		test('remove', {pattern: pattern}, done);
 	});
 
-	it('should remain only styles that matches to pattern', function (done) {
+	it('should remain only styles that matches to pattern', (done) => {
 		test('extracted', {pattern: pattern}, done);
 	});
 });
