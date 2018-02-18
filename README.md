@@ -31,10 +31,10 @@
 const options = {
   pattern: /{{[^\}]+}}/g
 };
-postcss([ require('postcss-extract-styles')(options) ]
+postcss([ require('postcss-extract-styles')(options) ])
   .then((result) => {
-     result.css // would be the "remain" part
-     result.extracted // would be the "extracted" part
+     result.css // will be the "remain" part
+     result.extracted // will be the "extracted" part
   });
 ```
 
