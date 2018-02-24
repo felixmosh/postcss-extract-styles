@@ -2,8 +2,9 @@ const postcss = require('postcss');
 
 module.exports = postcss.plugin('postcss-extract-styles', (opts) => {
   return (css, result) => {
-    const extractedCSS = postcss.root();
+    opts.pattern = [].concat(opts.pattern || []);
 
+    const extractedCSS = postcss.root();
     extractStyles(css, extractedCSS, opts);
 
     result.root = css;
@@ -31,7 +32,8 @@ function extractStyles(css, newcss, opts) {
 
 function extractFromDeclarations(rule, newRule, options) {
   rule.walkDecls((decl) => {
-    if (options.pattern.test(decl.toString())) {
+    const shouldExtractDecl = options.pattern.some((p) => p.test(decl.toString()));
+    if (shouldExtractDecl) {
       const newDecl = decl.clone();
       newDecl.raws = decl.raws;
       newRule.append(newDecl);

@@ -1,0 +1,51 @@
+
+
+.tpa-first:hover {
+	color: [[tpa-color-1]];
+	border-width: "unit(--someParam, px)";
+}
+
+.tpa-second {
+	font:[[Body-M]];
+	color: "color(color-2)";
+}
+
+.only-tpa {
+	color: [[tpa-color-2]];
+	background-color: "opacity(color(color-2), 0.5)";
+}
+
+@media (min-width: 300px) and (max-width: 730px) {
+	.tpa-first:hover {
+		color: [[tpa-color-1]];
+		border-width: "unit(--someParam, px)";
+	}
+
+	.tpa-second {
+		font:[[Body-M]];
+		color: "color(color-2)";
+	}
+
+	.only-tpa {
+		color: [[tpa-color-2]];
+		background-color: "opacity(color(color-2), 0.5)";
+	}
+}
+
+@keyframes identifier {
+	0% { color: [[xxx yyy]]; }
+}
+
+.with-css-variable {
+	--someParam: "font({theme:'Body-M', fontSize:'15px'})";
+}
+
+:root {
+	--otherParam: "number(1)";
+}
+
+@media (min-width: 300px) and (max-width: 730px) {
+	.tpa-first:hover {
+		width: [[ tpa-width ]];
+	}
+}
