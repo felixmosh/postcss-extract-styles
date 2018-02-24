@@ -1,6 +1,6 @@
 {
   "name": "postcss-extract-styles",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "PostCSS plugin that extracts styles from css based on decelerations matching.",
   "keywords": [
     "postcss",
